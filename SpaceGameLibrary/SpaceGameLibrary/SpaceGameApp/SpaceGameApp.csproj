@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpaceGameLibrary.csproj">
+      <Project>{1d2a5e0c-905d-499a-bdad-a3d37d4360c6}</Project>
+      <Name>SpaceGameLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

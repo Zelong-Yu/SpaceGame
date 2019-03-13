@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceGameLibrary;
 
 namespace SpaceGameApp
 {
@@ -10,6 +11,9 @@ namespace SpaceGameApp
     {
         static void Main(string[] args)
         {
+            Planet planet = new Planet();
+            planet.Quadrant();
+            Console.ReadKey();
         }
     }
 }

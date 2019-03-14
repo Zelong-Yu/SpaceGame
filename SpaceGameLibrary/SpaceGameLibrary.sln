@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceGameLibraryTests", "Sp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarTrekTradeWar", "StarTrekTradeWar\StarTrekTradeWar.csproj", "{E11C6415-A377-4593-AB26-55AD769EE4F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceGameApp", "SpaceGameLibrary\SpaceGameApp\SpaceGameApp.csproj", "{4A59CC0F-B167-4A7A-A0CC-9084009E1F82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E11C6415-A377-4593-AB26-55AD769EE4F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E11C6415-A377-4593-AB26-55AD769EE4F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E11C6415-A377-4593-AB26-55AD769EE4F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A59CC0F-B167-4A7A-A0CC-9084009E1F82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A59CC0F-B167-4A7A-A0CC-9084009E1F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A59CC0F-B167-4A7A-A0CC-9084009E1F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A59CC0F-B167-4A7A-A0CC-9084009E1F82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

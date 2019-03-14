@@ -13,8 +13,9 @@ namespace SpaceGameApp
         {
             Planet planet = new Planet();
             Console.WriteLine("\n\n");
-            //Call DisplayHeader from Planet class
-            planet.DisplayHeader();
+            //Call DisplayHeader from Utility class
+            Utility forTest = new Utility();
+            forTest.DisplayHeader();
             Console.WriteLine("\n\n");
 
             //Display Quadrant method content

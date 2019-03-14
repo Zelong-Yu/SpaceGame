@@ -14,7 +14,7 @@ namespace SpaceGameLibrary.Tests
         [TestMethod()]
         public void DisplayHeaderTest()
         {
-            Planet test = new Planet();
+            Utility test = new Utility();
             test.DisplayHeader();
         }
 

@@ -45,6 +45,18 @@ namespace SpaceGameLibrary
                 b -= gstep;
                 b -= bstep;
             }
+
+            int DA = 244;
+            int V = 212;
+            int ID = 255;
+            for (int i = 0; i < 1; i++)
+            {
+                Colorful.Console.WriteAscii("Star Trek Trade War", Color.FromArgb(DA, V, ID));
+
+                DA -= 8;
+                V -= 6;
+            }
+            System.Console.WriteLine("Try again");
         }
     }
 }

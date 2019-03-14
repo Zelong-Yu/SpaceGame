@@ -12,7 +12,7 @@ namespace SpaceGameLibrary
     {
         public void DisplayHeader()
         {
-            
+
             List<string> storyFragments = new List<string>();
 
             storyFragments.Add(@"  /$$$$$$   /$$                               /$$$$$$$$                  /$$         ");
@@ -31,16 +31,19 @@ namespace SpaceGameLibrary
             storyFragments.Add(@"   $$ |$$ |     $$  __$$ |$$ |  $$ |$$   ____|      $$$  / \$$$ |$$  __$$ |$$ |      ");
             storyFragments.Add(@"   $$ |$$ |     \$$$$$$$ |\$$$$$$$ |\$$$$$$$\       $$  /   \$$ |\$$$$$$$ |$$ |      ");
             storyFragments.Add(@"   \__|\__|      \_______| \_______| \_______|      \__/     \__| \_______|\__|      ");
+            ColorGradientDisplay(storyFragments);
+        }
 
-            int r = 225;
-            int g = 255;
-            int b = 250;
+        public static void ColorGradientDisplay(List<string> storyFragments, int r=225, int g=255, int b=250, int rstep=9, int gstep=9, int bstep=0)
+        {
+ 
             for (int i = 0; i < storyFragments.Count; i++)
             {
                 Colorful.Console.WriteLine(storyFragments[i], Color.FromArgb(r, g, b));
 
-                r -= 9;
-                b -= 9;
+                r -= rstep;
+                b -= gstep;
+                b -= bstep;
             }
         }
     }

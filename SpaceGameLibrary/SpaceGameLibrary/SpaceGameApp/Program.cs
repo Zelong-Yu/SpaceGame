@@ -21,6 +21,9 @@ namespace SpaceGameApp
             //Display Quadrant method content
             planet.Quadrant();
             Console.ReadKey();
+
+            int[,] MapGrid = new int[10, 10];
+            
         }
     }
 }

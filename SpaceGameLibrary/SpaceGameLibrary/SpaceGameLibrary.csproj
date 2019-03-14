@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Map.cs" />
+    <Compile Include="Ship.cs" />
+    <Compile Include="Star.cs" />
+    <Compile Include="Ilocatable.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

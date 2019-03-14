@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceGameLibrary
 {
-    class Star : Ilocatable
+    public class Star : Ilocatable
     {
         int Id { get; set; }
         int x { get; set; }

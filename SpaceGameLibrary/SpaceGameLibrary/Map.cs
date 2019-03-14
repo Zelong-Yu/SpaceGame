@@ -9,12 +9,12 @@ namespace SpaceGameLibrary
     public class Map
     {
         int[,] MapGrid;
-        List<Ilocatable> ObjectOnMap;
+        List<Ilocatable> ObjectsOnMap;
         public Map()
         {
             MapGrid = new int[10, 10];
+            ObjectsOnMap = new List<Ilocatable>();
 
-            
 
             //ObjectOnMap = ObjectToBeAdded;
         }
@@ -25,8 +25,19 @@ namespace SpaceGameLibrary
             {
                 MapGrid[item.GetY(), item.GetX()] = item.GetId();
             }
-            ObjectOnMap = L;
+            ObjectsOnMap = L;
 
+        }
+
+        public bool Register(Ilocatable item)
+        {
+            if (!isOccupied(item.GetX(), item.GetY()))
+            {
+                MapGrid[item.GetY(), item.GetX()] = item.GetId();
+                ObjectsOnMap.Add(item);
+                return true;
+            }
+            else return false;
         }
 
         public bool isOccupied(int x, int y)

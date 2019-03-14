@@ -26,6 +26,9 @@ namespace SpaceGameApp
             Console.WriteLine("\n\n");
             Map map = new Map();
             map.DisplayMap();
+            Ship ship = new Ship(2, 2);
+            map.Register(ship);
+            map.DisplayMap();
             Console.ReadKey();
         }
     }

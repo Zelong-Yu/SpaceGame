@@ -26,8 +26,19 @@ namespace SpaceGameApp
             Console.WriteLine("\n\n");
             Map map = new Map();
             map.DisplayMap();
-            Ship ship = new Ship(2, 2);
+            Console.WriteLine();
+            Ship ship = new Ship(1, 2);
             map.Register(ship);
+            map.DisplayMap();
+            Console.WriteLine();
+            ship.Move(5, 2,map);
+            map.DisplayMap();
+            Console.WriteLine();
+            Star star = new Star(1, 2,5);
+            map.Register(star);
+            map.DisplayMap();
+
+            ship.Move(1, 2, map);
             map.DisplayMap();
             Console.ReadKey();
         }

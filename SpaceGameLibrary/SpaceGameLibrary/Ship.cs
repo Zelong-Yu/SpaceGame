@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceGameLibrary
 {
-    public class Ship : Ilocatable
+    public class Ship : ILocatable
     {
         public static int shipCount=0;
         int Id { get; set; }
@@ -41,7 +41,7 @@ namespace SpaceGameLibrary
             return y;
         }
 
-        public bool Move(Ilocatable Coord)
+        public bool Move(ILocatable Coord)
             {
                 this.x = Coord.GetX();
                 this.y = Coord.GetY();
@@ -54,7 +54,7 @@ namespace SpaceGameLibrary
             {
                 this.x = x;
                 this.y = y;
-
+                map.Update();
                 return true;
             }
             return false;

@@ -6,13 +6,21 @@ using System.Threading.Tasks;
 
 namespace SpaceGameLibrary
 {
-    public class Star : Ilocatable
+    public class Star : ILocatable
     {
+        public static int starCount = 0;
         int Id { get; set; }
         int x { get; set; }
         int y { get; set; }
         string name { get; set; }
 
+        public Star(int x, int y,  int Id, string name = "star")
+        {
+            this.Id = Id;
+            this.x = x;
+            this.y = y;
+            starCount++;
+        }
         public int GetId()
         {
             return Id;

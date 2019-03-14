@@ -9,17 +9,17 @@ namespace SpaceGameLibrary
     public class Map
     {
         int[,] MapGrid;
-        List<Ilocatable> ObjectsOnMap;
+        List<ILocatable> ObjectsOnMap;
         public Map()
         {
             MapGrid = new int[10, 10];
-            ObjectsOnMap = new List<Ilocatable>();
+            ObjectsOnMap = new List<ILocatable>();
 
 
             //ObjectOnMap = ObjectToBeAdded;
         }
 
-        public void Update(List<Ilocatable> L)
+        public void Update(List<ILocatable> L)
         {
             foreach (var item in L)
             {
@@ -29,7 +29,17 @@ namespace SpaceGameLibrary
 
         }
 
-        public bool Register(Ilocatable item)
+        public void Update()
+        {
+            MapGrid = new int[10, 10];
+            foreach (var item in ObjectsOnMap)
+            {
+                MapGrid[item.GetY(), item.GetX()] = item.GetId();
+            }
+
+        }
+
+        public bool Register(ILocatable item)
         {
             if (!isOccupied(item.GetX(), item.GetY()))
             {

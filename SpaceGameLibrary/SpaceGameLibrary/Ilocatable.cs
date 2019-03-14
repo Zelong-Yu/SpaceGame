@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceGameLibrary
 {
-    public interface Ilocatable
+    public interface ILocatable
     {
         int GetId();
         int GetX();

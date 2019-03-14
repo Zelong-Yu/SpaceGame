@@ -22,8 +22,11 @@ namespace SpaceGameApp
             planet.Quadrant();
             Console.ReadKey();
 
-            int[,] MapGrid = new int[10, 10];
-            
+            //display 2D Array
+            Console.WriteLine("\n\n");
+            Map map = new Map();
+            map.DisplayMap();
+            Console.ReadKey();
         }
     }
 }

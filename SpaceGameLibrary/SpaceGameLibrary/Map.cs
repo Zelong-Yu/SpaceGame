@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace SpaceGameLibrary
 {
-    class Map
+    public class Map
     {
         int[,] MapGrid;
         List<Ilocatable> ObjectOnMap;
-        public Map(List<Ilocatable> ObjectToBeAdded)
+        public Map()
         {
             MapGrid = new int[10, 10];
-            ObjectOnMap = ObjectToBeAdded;
+
+            
+
+            //ObjectOnMap = ObjectToBeAdded;
         }
 
         public void Update(List<Ilocatable> L)
@@ -37,10 +40,15 @@ namespace SpaceGameLibrary
 
         public void DisplayMap()
         {
-            foreach (int[,] array in MapGrid)
+            for (int i = 0; i < 10; i++)
             {
-
+                for (int j = 0; j < 10; j++)
+                {
+                    Console.Write(MapGrid[i, j].ToString() + ' ');
+                }
+                Console.Write("\n");
             }
+            
         }
 
          

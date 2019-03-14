@@ -12,6 +12,12 @@ namespace SpaceGameApp
         static void Main(string[] args)
         {
             Planet planet = new Planet();
+            Console.WriteLine("\n\n");
+            //Call DisplayHeader from Planet class
+            planet.DisplayHeader();
+            Console.WriteLine("\n\n");
+
+            //Display Quadrant method content
             planet.Quadrant();
             Console.ReadKey();
         }

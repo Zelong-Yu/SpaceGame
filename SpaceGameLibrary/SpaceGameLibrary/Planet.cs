@@ -12,7 +12,9 @@ namespace SpaceGameLibrary
 
         public void Quadrant()
         {
-            Console.WriteLine("\t\t" + "  1 2 3 4 5 6 7 8 9 10");
+            Console.WriteLine("\t\t\t" + "  MAP");
+            Console.WriteLine();
+            Console.WriteLine("\t\t" + "   1 2 3 4 5 6 7 8 9 10");
             Console.WriteLine("\t\t" + " 1 * . . . . . . . . ." + "\t" +"Startdate");
             Console.WriteLine("\t\t" + " 2 . . . E . . . . . ." + "\t" +"Condition");
             Console.WriteLine("\t\t" + " 3 . . . . . . * . . ." + "\t" +"Position");

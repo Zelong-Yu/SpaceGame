@@ -22,6 +22,18 @@ namespace SpaceGameApp
             planet.Quadrant();
             Console.ReadKey();
 
+            //Display Market
+            Market market = new Market();
+            Console.Write("Enter Market Name: ");
+            market.MarketName = Console.ReadLine();
+            Console.Write("Enter Market Currency: ");
+            market.MarketCurrency = Console.ReadLine();
+            Console.Write("Enter Your Inventories on Hand: ");
+            market.GoodInventory = double.Parse( Console.ReadLine());
+
+            market.DisplayMarket();
+
+
             //display 2D Array
             Console.WriteLine("\n\n");
             Map map = new Map();

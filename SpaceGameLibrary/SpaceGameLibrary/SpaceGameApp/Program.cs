@@ -23,15 +23,17 @@ namespace SpaceGameApp
             Console.ReadKey();
 
             //Display Market
+            Console.WriteLine("\n\n");
             Market market = new Market();
-            Console.Write("Enter Market Name: ");
+            Console.Write("\t\tEnter Market Name: ");
             market.MarketName = Console.ReadLine();
-            Console.Write("Enter Market Currency: ");
+            Console.Write("\t\tEnter Market Currency: ");
             market.MarketCurrency = Console.ReadLine();
-            Console.Write("Enter Your Inventories on Hand: ");
+            Console.Write("\t\tEnter Your Inventories on Hand: ");
             market.GoodInventory = double.Parse( Console.ReadLine());
 
             market.DisplayMarket();
+            Console.ReadKey();
 
 
             //display 2D Array

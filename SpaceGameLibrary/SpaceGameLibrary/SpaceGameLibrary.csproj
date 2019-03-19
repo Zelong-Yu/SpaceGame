@@ -53,7 +53,7 @@
     <Compile Include="Market.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Star.cs" />
-    <Compile Include="Ilocatable.cs" />
+    <Compile Include="ILocatable.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

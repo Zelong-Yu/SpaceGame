@@ -5,7 +5,7 @@ namespace SpaceGameApp
 {
     public class App
     {
-            Planet planet = new Planet();
+        Planet planet = new Planet();
         public App()
         {
         }

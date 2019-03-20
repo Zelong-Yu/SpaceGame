@@ -11,14 +11,8 @@ namespace StarTrekTradeWar
     {
         static void Main(string[] args)
         {
-            Test();
+            new App().Run();
         }
 
-        static void Test()
-        {
-            Utility forTest = new Utility();
-            forTest.DisplayHeader();
-            Console.ReadKey();
-        }
     }
 }

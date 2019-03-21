@@ -12,6 +12,8 @@ namespace StarTrekTradeWar
         double Y { get; set; }
         string Name { get; set; }
         string Description { get; set; }
+        List<(Item, decimal)> ItemMarkUps { get; set; }
         double DistanceTo(ILocation otherLocation);
+        decimal CostOf(Item item);
     }
 }

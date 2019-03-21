@@ -30,6 +30,14 @@ namespace StarTrekTradeWar
 
         private void Initialize()
         {
+            //Populate Game World
+            PopulateWorld();
+            //Initialize player
+            hero = new Player(locations[0]);
+        }
+
+        private void PopulateWorld()
+        {
             var TransAlum = new Item("Transparent aluminum", 100M, "Ultra-strong transparent metal essential to build a spaceship.");
             var Biogel = new Item("Bio-mimetic gel", 50M, "Volatile substance highly sought after for use in illegal activities, such as genetic experimentation and biological weapons development.");
             var silk = new Item("Tholian silk", 10M, "valuable fabric");
@@ -48,7 +56,6 @@ namespace StarTrekTradeWar
                     ( silk, 2M),
                     ( TransAlum,0.5M)
                 }));
-            hero = new Player(locations[0]);
         }
 
         public void Run()
@@ -140,31 +147,59 @@ namespace StarTrekTradeWar
 
         private void SellMenu()
         {
-            throw new NotImplementedException();
+            int selected;
+            do
+            {
+                HUD();
+                selected = UI.SelectionMenu(GetPlayerItems(hero.Inventory));
+                if (selected == -1) break;
+                else
+                {
+                    hero.SellItem(hero.Inventory[selected]);
+                    break;
+                }
+            } while (selected != -1);
         }
 
         private void BuyMenu()
         {
-            throw new NotImplementedException();
-            //IDictionary<Item, decimal> items = ((Planet)hero.location).ItemMarkUps;
-            //Console.Clear();
-            //PrintItems(items);
-            //var itemIndex = Utility.PromptForInput("Which item would you like to buy: ", 1, items.Count);
-            //if (!itemIndex.cancelled)
-            //{
-            //    hero.BuyItem(items[itemIndex.input - 1]);
-            //}
+            int selected;
+            do
+            {
+                HUD();
+                selected = UI.SelectionMenu(GetLocalItems(hero.location.ItemMarkUps));
+                if (selected == -1) break;
+                else
+                {
+                    hero.BuyItem(hero.location.ItemMarkUps[selected].Item1);
+                    break;
+                }
+            } while (selected !=-1);
         }
 
-        //private void PrintItems(IDictionary<Item, decimal> items)
-        //{
-        //    for (int i = 0; i < items.Count; i++)
-        //    {
-        //        var item = items.;
-        //        var cost = ((Planet)hero.location).CostOf(item);
-        //        Console.WriteLine($"{i + 1}. {item.name} - {cost:f2} cr");
-        //    }
-        //}
+        private List<string> GetLocalItems(List<(Item, decimal)> itemswithmarkup)
+        {
+            List<string> localPriceList = new List<string>();
+            for (int i = 0; i < itemswithmarkup.Count; i++)
+            {
+                var item = itemswithmarkup[i].Item1;
+                var price = hero.location.CostOf(item);
+                localPriceList.Add($"{item.Name} - {price:f2} Space Dollar");
+            }
+            return localPriceList;
+        }
+
+        private List<string> GetPlayerItems(List<Item> itemswithoutmarkup)
+        {
+            List<string> PlayerPriceList = new List<string>();
+            for (int i = 0; i < itemswithoutmarkup.Count; i++)
+            {
+                var item = itemswithoutmarkup[i];
+                var price = hero.location.CostOf(item);
+                PlayerPriceList.Add($"{item.Name} - {price:f2} Space Dollar");
+            }
+            return PlayerPriceList;
+        }
 
         private void TravelMenu()
         {
@@ -204,6 +239,9 @@ namespace StarTrekTradeWar
         private void LoadGame()
         {
             hero = Utility.ReadFromJsonFile<Player>(fileName);
+            //To properly load the game, make the player travel to same location saved
+            ILocation loadLocation = locations.Find(x => x.Name == hero.location.Name);
+            hero.TravelTo(loadLocation, 1.0);
         }
 
         private void SaveGame()

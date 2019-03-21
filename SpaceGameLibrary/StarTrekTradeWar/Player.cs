@@ -15,6 +15,7 @@ namespace StarTrekTradeWar
         bool dead;
 
         public ILocation location;
+        public List<Item> Inventory = new List<Item>();
 
         public double Age { get => this._age; set => this._age = value; }
         public decimal Money { get => this._money; set => this._money = value; }
@@ -58,6 +59,18 @@ namespace StarTrekTradeWar
             TimeNeed = distance / speed;
             FuelNeed = fuelConsumptionPerLY * distance;
 
+        }
+
+        public void BuyItem(Item item)
+        {
+            _money -= location.CostOf(item);
+            Inventory.Add(item);
+        }
+
+        public void SellItem(Item item)
+        {
+            _money += location.CostOf(item);
+            Inventory.Remove(item);
         }
     }
 }

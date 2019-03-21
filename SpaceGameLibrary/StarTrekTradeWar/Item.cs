@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace StarTrekTradeWar
 {
     [Serializable]
-    class Item : IPricable
+    public class Item : IPricable
     {
         string _name;
         string _description;

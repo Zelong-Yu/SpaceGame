@@ -14,13 +14,16 @@ namespace StarTrekTradeWar
 
         double _x;
         double _y;
+
+        List<(Item, decimal)> itemMarkUps= new List<(Item, decimal)>();
+
         public double X { get => this._x; set => this._x = value; }
         public double Y { get => this._y; set => this._y = value; }
         public string Name { get => this._name; set => this._name = value; }
         public string Description { get => this._description; set => this._description = value; }
+        List<(Item, decimal)> ILocation.ItemMarkUps { get => this.itemMarkUps; set => this.itemMarkUps =value; }
 
         //List of mark up factors with each item on the planet
-        public List<(Item, decimal)> ItemMarkUps= new List<(Item, decimal)>();
 
         public Planet()
         {
@@ -35,7 +38,7 @@ namespace StarTrekTradeWar
             this._description = description;
             this._x = x;
             this._y = y;
-            this.ItemMarkUps = items;
+            this.itemMarkUps = items;
         }
 
         public double DistanceTo(ILocation otherLocation)
@@ -45,9 +48,12 @@ namespace StarTrekTradeWar
             return Math.Sqrt(left + right);
         }
 
-        public decimal Costof(Item item)
+        public decimal CostOf(Item item)
         {
-
+            decimal itemMarkUp = (from e in itemMarkUps
+                             where e.Item1.Name == item.Name
+                             select e.Item2).FirstOrDefault();
+            return item.Price * itemMarkUp;
             
         }
     }

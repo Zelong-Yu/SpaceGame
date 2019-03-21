@@ -53,6 +53,8 @@ namespace StarTrekTradeWar
             decimal itemMarkUp = (from e in itemMarkUps
                              where e.Item1.Name == item.Name
                              select e.Item2).FirstOrDefault();
+            //If the planet doesn't have Mark up rate set it to 1.
+            if (itemMarkUp == 0M) itemMarkUp = 1M;
             return item.Price * itemMarkUp;
             
         }

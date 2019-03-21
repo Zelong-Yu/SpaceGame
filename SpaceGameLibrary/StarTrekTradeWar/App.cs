@@ -100,10 +100,10 @@ namespace StarTrekTradeWar
 
         private static void AddActionOptions(List<string> actions)
         {
-            actions.Add("Travel to other planets");
-            actions.Add("Check Planet Market/ Buy");
-            actions.Add("Check inventory/ Sell");
-            actions.Add("Refuel");
+            actions.Add("Travel to Other Planets");
+            actions.Add("Check Planet Market/Buy");
+            actions.Add("Check inventory   /Sell");
+            actions.Add("Refuel         /Service");
             actions.Add("Save game");
             actions.Add("Load game");
         }
@@ -142,7 +142,13 @@ namespace StarTrekTradeWar
 
         private void RefuelMenu()
         {
-            throw new NotImplementedException();
+            int selected;
+            do
+            {
+                HUD();
+                selected = UI.SelectionMenu(new List<string>() { });
+                if (selected == -1) break;
+            } while (selected != -1);
         }
 
         private void SellMenu()
@@ -151,6 +157,11 @@ namespace StarTrekTradeWar
             do
             {
                 HUD();
+                if (!hero.Inventory.Any())
+                {
+                    Utility.PromptForInput("Your Storage Deck is empty. Hit any key to continue.");
+                    break;
+                }
                 selected = UI.SelectionMenu(GetPlayerItems(hero.Inventory));
                 if (selected == -1) break;
                 else
@@ -183,8 +194,11 @@ namespace StarTrekTradeWar
             for (int i = 0; i < itemswithmarkup.Count; i++)
             {
                 var item = itemswithmarkup[i].Item1;
-                var price = hero.location.CostOf(item);
-                localPriceList.Add($"{item.Name} - {price:f2} Space Dollar");
+                var localprice = hero.location.CostOf(item);
+                string discountInfo="";
+                if (localprice > item.Price) discountInfo = "Price HIGHER than usual.";
+                else if (localprice < item.Price) discountInfo = "Price LOWER than usual.";
+                localPriceList.Add($"{item.Name} - {localprice:f2} Space Dollar    "+discountInfo);
             }
             return localPriceList;
         }
@@ -195,8 +209,11 @@ namespace StarTrekTradeWar
             for (int i = 0; i < itemswithoutmarkup.Count; i++)
             {
                 var item = itemswithoutmarkup[i];
-                var price = hero.location.CostOf(item);
-                PlayerPriceList.Add($"{item.Name} - {price:f2} Space Dollar");
+                var localprice = hero.location.CostOf(item);
+                string discountInfo = "";
+                if (localprice > item.Price) discountInfo = "Price HIGHER than usual.";
+                else if (localprice < item.Price) discountInfo = "Price LOWER than usual.";
+                PlayerPriceList.Add($"{item.Name} - {localprice:f2} Space Dollar    "+discountInfo);
             }
             return PlayerPriceList;
         }

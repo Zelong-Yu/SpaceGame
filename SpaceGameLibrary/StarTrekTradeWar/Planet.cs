@@ -18,7 +18,13 @@ namespace StarTrekTradeWar
         public string Name { get => this._name; set => this._name = value; }
         public string Description { get => this._description; set => this._description = value; }
 
-
+        public Planet()
+        {
+            this._name = "Default Planet";
+            this._description = "Default Description";
+            this._x = 0;
+            this._y = 0;
+        }
         public Planet(string name, string description, double x, double y)
         {
             this._name = name;

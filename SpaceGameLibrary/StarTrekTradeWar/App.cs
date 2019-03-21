@@ -11,6 +11,12 @@ namespace StarTrekTradeWar
         List<ILocation> locations = new List<ILocation>();
 
         Player hero;
+
+        //Create a message broker to responde to events
+        //MessageBroker broker = new MessageBroker();
+        //EventReceiver receiver;
+        //EventSender sender;
+
         public App()
         {
             //Initialize the game
@@ -18,7 +24,11 @@ namespace StarTrekTradeWar
                 "distance. The birthplace of mankind.", 0, 0));
             locations.Add(new Planet("Proxima Centauri b", "The new home world of the human race ",
                 0, 4.22));
-            hero = new Player(locations[0]);
+            hero = new Player(locations[1]);
+
+            //receiver = new EventReceiver(broker);
+            //sender = new EventSender(broker);
+            //receiver.SubscribeToEvent();
         }
 
         public void Run()
@@ -37,11 +47,7 @@ namespace StarTrekTradeWar
         private EndCondition GameLoop()
         {
             List<string> actions = new List<string>();
-            actions.Add("Travel to other planets");
-            actions.Add("Buy resource");
-            actions.Add("Sell resource");
-            actions.Add("Save game");
-            actions.Add("Load game");
+            AddActionOptions(actions);
             EndCondition endCondition = EndCondition.NotEnd;
             do
             {
@@ -51,11 +57,34 @@ namespace StarTrekTradeWar
                     $"{hero.Age}  Money: {hero.Money}  Fuel: {hero.Fuel}\n");
                 //TODO: PrintActionsMenu
                 int selected = UI.SelectionMenu(actions);
-                if (selected == -1) endCondition = EndCondition.UserEnd;
+                endCondition = HandleSelection(selected,actions);
 
             } while (endCondition == EndCondition.NotEnd);
 
             return endCondition;
+        }
+
+        private static void AddActionOptions(List<string> actions)
+        {
+            actions.Add("Travel to other planets");
+            actions.Add("Buy resource");
+            actions.Add("Sell resource");
+            actions.Add("Save game");
+            actions.Add("Load game");
+        }
+
+        private EndCondition HandleSelection(int selected, List<string> actions)
+        {
+            switch (selected)
+            {
+                case -1:
+                    return EndCondition.UserEnd;
+                default:
+                    break;
+            }
+            //sender.TriggerEvent<Player>(actions[selected],hero); 
+
+            return EndCondition.NotEnd;
         }
     }
 }

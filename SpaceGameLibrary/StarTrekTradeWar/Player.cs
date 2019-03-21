@@ -20,6 +20,14 @@ namespace StarTrekTradeWar
         public decimal Money { get => this._money; set => this._money = value; }
         public double Fuel { get => this._fuel; set => this._fuel = value; }
 
+        public Player()
+        {
+            this.location = new Planet();
+            this._age = 20;
+            this._money = 1000;
+            this._fuel = 100;
+            this.dead = false;
+        }
         public Player(ILocation location, double age = 20, Decimal money = 1000, double fuel = 100)
         {
             this.location = location;

@@ -51,12 +51,16 @@ namespace StarTrekTradeWar
                     PrintAsciiArt("See You Next Time");
                     break;
                 case EndCondition.AgeOut:
+                    UI.CenteredString("You're 70 years old...");
                     break;
                 case EndCondition.MoneyOut:
+                    UI.CenteredString("You're broke");
                     break;
                 case EndCondition.FuelOut:
+                    UI.CenteredString("Your stupidity has left you on your own in the galaxy without fuel");
                     break;
                 case EndCondition.Death:
+                    UI.CenteredString("Death is inevitable");
                     break;
                 default:
                     break;

@@ -14,18 +14,11 @@ namespace StarTrekTradeWar
 
         string fileName = "hero.json";
 
-        //Create a message broker to responde to events
-        //MessageBroker broker = new MessageBroker();
-        //EventReceiver receiver;
-        //EventSender sender;
 
         public App()
         {
             Initialize();
 
-            //receiver = new EventReceiver(broker);
-            //sender = new EventSender(broker);
-            //receiver.SubscribeToEvent();
         }
 
         private void Initialize()
@@ -82,13 +75,34 @@ namespace StarTrekTradeWar
                 HUD();
                 //TODO: PrintActionsMenu
                 int selected = UI.SelectionMenu(actions);
-                endCondition = HandleSelection(selected);
 
+                endCondition = DecideGameEnd(HandleSelection(selected));
+                
             } while (endCondition == EndCondition.NotEnd);
 
             return endCondition;
         }
 
+        private EndCondition DecideGameEnd(EndCondition endCondition)
+        {
+            EndCondition AgeCheck(EndCondition e) => hero.Age >= 70 ? EndCondition.AgeOut : e;
+
+            EndCondition MoneyCheck(EndCondition e) => hero.Money < 0 ? EndCondition.MoneyOut : e;
+
+            EndCondition FuelCheck(EndCondition e) => hero.Fuel < 0 ? EndCondition.FuelOut : e;
+
+            if (endCondition == EndCondition.NotEnd)
+            {
+                endCondition = AgeCheck(endCondition);
+                endCondition = MoneyCheck(endCondition);
+                endCondition = FuelCheck(endCondition);
+            }
+
+
+            return endCondition;
+        }
+
+        //Top Display for information about player status and local info
         private void HUD()
         {
             Console.Clear();
@@ -135,7 +149,6 @@ namespace StarTrekTradeWar
                 default:
                     break;
             }
-            //sender.TriggerEvent<Player>(actions[selected],hero); 
 
             return EndCondition.NotEnd;
         }

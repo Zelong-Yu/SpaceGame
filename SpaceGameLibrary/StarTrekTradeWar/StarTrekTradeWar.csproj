@@ -55,12 +55,9 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="EndCondition.cs" />
-    <Compile Include="EventReceiver.cs" />
-    <Compile Include="EventSender.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="IPricable.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="MessageBroker.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

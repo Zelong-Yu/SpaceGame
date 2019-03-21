@@ -11,7 +11,7 @@ namespace StarTrekTradeWar
     {
 
 
-        public static int SelectionMenu(List<string> optionslist, string title = "Options (Q to quit): ")
+        public static int SelectionMenu(List<string> optionslist, string title = "Options (Q to quit): ", string bottomprompt="")
         {
             var done = false;
 
@@ -26,7 +26,7 @@ namespace StarTrekTradeWar
                 var cursorTopPos = Console.CursorTop;
                 Console.WriteLine(title);
                 PrintMenu(selector, optionslist);
-                var key = Utility.PromptForInput("");
+                var key = Utility.PromptForInput(bottomprompt);
                 switch (key)
                 {
                     case ConsoleKey.DownArrow:

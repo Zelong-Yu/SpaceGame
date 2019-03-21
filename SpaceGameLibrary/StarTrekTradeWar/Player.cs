@@ -39,16 +39,25 @@ namespace StarTrekTradeWar
 
         public void TravelTo(ILocation destination, double warpSpeed)
         {
-            var distance = location.DistanceTo(destination);
-            var speed = Utility.WarpSpeedToLightSpeed(warpSpeed);
-            var fuelConsumptionPerLY = Utility.WarpSpeedToFuelConsumptionPerLY(warpSpeed);
+            double distance, speed;
+            TravelEstimate(destination, warpSpeed, out distance, out speed, out double TimeNeed, out double FuelNeed);
 
-            _age += distance / speed;
+            _age += TimeNeed;
 
-            _fuel -= fuelConsumptionPerLY * distance;
+            _fuel -= FuelNeed;
 
             this.location = destination;
         }
 
+        public void TravelEstimate(ILocation destination, double warpSpeed, out double distance, 
+            out double speed,  out double TimeNeed, out double FuelNeed)
+        {
+            distance = location.DistanceTo(destination);
+            speed = Utility.WarpSpeedToLightSpeed(warpSpeed);
+            double fuelConsumptionPerLY = Utility.WarpSpeedToFuelConsumptionPerLY(warpSpeed);
+            TimeNeed = distance / speed;
+            FuelNeed = fuelConsumptionPerLY * distance;
+
+        }
     }
 }

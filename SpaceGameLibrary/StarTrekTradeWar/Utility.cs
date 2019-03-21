@@ -85,5 +85,32 @@ namespace StarTrekTradeWar
                     reader.Close();
             }
         }
+
+        public static double? PromptForInput(string prompt, double min, double max)
+        {
+            bool valid = false;
+            double input = 0.0;
+            Console.WriteLine($"{prompt} Range: ({min:f1},{max:f1}] (Q to quit)");
+            do
+            {
+                Console.Write($">");
+
+                try
+                {
+                    string userInput = Console.ReadLine();
+                    if (userInput == "Q" || userInput == "q") return null;
+                    input = double.Parse(userInput);
+                    if (input > min && input <= max)
+                    {
+                        valid = true;
+                    }
+                }
+                catch (FormatException)
+                {
+
+                }
+            } while (!valid);
+            return input;
+        }
     }
 }

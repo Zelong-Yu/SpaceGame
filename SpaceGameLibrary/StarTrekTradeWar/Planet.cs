@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace StarTrekTradeWar
 {
+    [Serializable]
     class Planet : ILocation
     {
         string _name;
@@ -18,6 +19,9 @@ namespace StarTrekTradeWar
         public string Name { get => this._name; set => this._name = value; }
         public string Description { get => this._description; set => this._description = value; }
 
+        //List of mark up factors with each item on the planet
+        public List<(Item, decimal)> ItemMarkUps= new List<(Item, decimal)>();
+
         public Planet()
         {
             this._name = "Default Planet";
@@ -25,12 +29,13 @@ namespace StarTrekTradeWar
             this._x = 0;
             this._y = 0;
         }
-        public Planet(string name, string description, double x, double y)
+        public Planet(string name, string description, double x, double y, List<(Item, decimal)> items)
         {
             this._name = name;
             this._description = description;
             this._x = x;
             this._y = y;
+            this.ItemMarkUps = items;
         }
 
         public double DistanceTo(ILocation otherLocation)
@@ -38,6 +43,12 @@ namespace StarTrekTradeWar
             var left = Math.Pow(this.X - otherLocation.X, 2);
             var right = Math.Pow(this.Y - otherLocation.Y, 2);
             return Math.Sqrt(left + right);
+        }
+
+        public decimal Costof(Item item)
+        {
+
+            
         }
     }
 }

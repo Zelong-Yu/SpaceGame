@@ -33,14 +33,14 @@ namespace StarTrekTradeWar
         {
             var TransAlum = new Item("Transparent aluminum", 100M, "Ultra-strong transparent metal essential to build a spaceship.");
             var Biogel = new Item("Bio-mimetic gel", 50M, "Volatile substance highly sought after for use in illegal activities, such as genetic experimentation and biological weapons development.");
-            var silk = new Item("Tholian silk", 10M, "valuable fabric");
+            var silk = new Item("Tholian silk", 20M, "valuable fabric");
             var Redmatter = new Item("Red matter", 5000M, " red liquid material that is able to create a black hole when not properly contained");
-            
+            var kironide = new Item("Kironide", 200M, " telekinetic powers");
+
             //Initialize the game
             locations.Add(new Planet("Earth", "The birthplace of Homo sapiens. Once blue but " +
                 "now pale yellow as a result of human stupidity.", 0, 0, new List<(Item, decimal)>() {
-                    (silk, 0.5M),
-                    (Biogel, 2M)}));
+                    (silk, 0.5M)}));
             locations.Add(new Planet("Proxima Centauri b", "The first colony of the human race ",
                 4.22, 0, new List<(Item, decimal)>() {
                     ( TransAlum, 1M),
@@ -52,10 +52,15 @@ namespace StarTrekTradeWar
                     ( TransAlum,0.5M),
                     (Redmatter, 1.9M)
                 }));
+            locations.Add(new Planet("TRAPPIST-1e", "Solid, rocky, cold. What's flying there??",
+                0, 39.0, new List<(Item, decimal)>() {
+                    (kironide, 0.7M)
+                }));
             locations.Add(new Planet("Kepler-186f", "Secret outpost at the edge of Federation. Locals want Bio-mimetic gel for some reason...",
                 280.5, 485.6, new List<(Item, decimal)>() {
                     ( Biogel, 10M),
                     ( TransAlum,0.1M),
+                    (kironide, 3M)
                 }));
             locations.Add(new Planet("Kepler-442b", "The New Frontier. Gravity is weirdly strong in this small planet. What's THE MATTER?",
                 913.0, 913.0, new List<(Item, decimal)>() {
@@ -67,11 +72,10 @@ namespace StarTrekTradeWar
         {
             //Display entrance title
             Story.DisplayHeader();
-            // TODO: Display story plot
+            //Display story plot
             Story.DisplayIntro();
             //Main Gameloop
             var endCondition = GameLoop();
-
             //Give closing message if game ends
             Story.ClosingMessage(endCondition);
         }
@@ -333,6 +337,19 @@ namespace StarTrekTradeWar
                     if (selected == 0)
                     {
                         hero.TravelTo(destination, warpSpeed);
+                        //1 in 5 chance to get raid
+                        Random rnd = new Random();
+                        int num = rnd.Next(1000);
+                        if (num >= 800)
+                        {
+                            Decimal moneylost = (decimal)rnd.Next(100, 500);
+                            hero.Money -= moneylost;
+                            Console.Beep();
+                            Utility.PromptForInput($"You got raid! You lost ${moneylost}.  Hit any key to continue.                    ");
+
+                        }
+                        Utility.PromptForInput($"Travel Completed. Hit any key to continue.                             ");
+
                         break;
                     }
                     else break;

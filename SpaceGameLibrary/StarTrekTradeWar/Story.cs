@@ -46,11 +46,11 @@ namespace StarTrekTradeWar
         internal static void DisplayIntro()
         {
             Console.Clear();
-            System.Console.WriteLine("Stardate 3008, a great recession came. Galatic economic crisis swept across the United " +
-                "Federation of Planets. ");
+            System.Console.WriteLine("Stardate 48018.8, a Galatic economic crisis swept across the United " +
+                "Federation of Planets... ");
             Utility.PromptForInput("Press any key to continue");
             Console.Clear();
-            System.Console.WriteLine("The once forgotten concept of \"Money\" made its way back. The Starfleet has been privitized.");
+            System.Console.WriteLine("The once forgotten concept of \"Money\" made its way back. The Starfleet has been privitized...");
             Utility.PromptForInput("Press any key to continue");
             Console.Clear();
             System.Console.WriteLine("The Starfleet command secretly orders you, Captain Kirk's grandson, to earn $10,000 space dollors to save the Starfleet from financially ruined, through trading " +
@@ -82,13 +82,16 @@ namespace StarTrekTradeWar
                     PrintAsciiArt("See You Next Time");
                     break;
                 case EndCondition.AgeOut:
+                    System.Console.Beep();
                     UI.CenteredString("You're over 70 years old...time to retire, Captain");
                     PrintAsciiArt("TOO OLD");
                     break;
                 case EndCondition.MoneyOut:
+                    System.Console.Beep();
                     UI.CenteredString("You're out of money and out of goods. Starfleet Command is very disappointed.");
                     break;
                 case EndCondition.FuelOut:
+                    System.Console.Beep();
                     UI.CenteredString("Your stupidity has left you on your own drifting in the galaxy without fuel");
                     PrintAsciiArt("Out of Juice");
                     break;

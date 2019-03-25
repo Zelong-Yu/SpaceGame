@@ -39,12 +39,12 @@ namespace StarTrekTradeWar
                 "now pale yellow as a result of human stupidity.", 0, 0, new List<(Item, decimal)>() {
                     (silk, 0.5M),
                     (Biogel, 2M)}));
-            locations.Add(new Planet("Proxima Centauri b", "The new home world of the human race ",
+            locations.Add(new Planet("Proxima Centauri b", "The first colony of the human race ",
                 4.22, 0, new List<(Item, decimal)>() {
                     ( TransAlum, 1M),
                     ( Biogel,1M)
                 }));
-            locations.Add(new Planet("GJ 273b", "One of the most Earth-like planets ever found.",
+            locations.Add(new Planet("GJ 273b", "One of the most Earth-like planets ever found. Rich deposit of some special metal...",
                 11.61460079, 4.227368972, new List<(Item, decimal)>() {
                     ( silk, 2M),
                     ( TransAlum,0.5M)
@@ -91,12 +91,15 @@ namespace StarTrekTradeWar
             EndCondition MoneyCheck(EndCondition e) => hero.Money < 0 && !hero.Inventory.Any() ? EndCondition.MoneyOut : e;
             //Fuel Out Ending: user has no fuel left
             EndCondition FuelCheck(EndCondition e) => hero.Fuel < 0 ? EndCondition.FuelOut : e;
+            //Money Max end: user has earned more than $10000
+            EndCondition MoneyMaxCheck(EndCondition e) => hero.Money >= 10000 ? EndCondition.MoneyMax : e;
 
             if (endCondition == EndCondition.NotEnd)
             {
                 endCondition = AgeCheck(endCondition);
                 endCondition = MoneyCheck(endCondition);
                 endCondition = FuelCheck(endCondition);
+                endCondition = MoneyMaxCheck(endCondition);
             }
 
 
@@ -111,6 +114,7 @@ namespace StarTrekTradeWar
             UI.CenteredString($"Location: {hero.location.Name}   Age:" +
                 $"{hero.Age:f2} yrs old  Money: {hero.Money:f2} Space Dollor   Fuel: {hero.Fuel:f2} Unit of Dilithium\n");
             UI.CenteredString($"{hero.location.Description}");
+            UI.CenteredString($"===============================================================================================");
         }
 
         private static void AddActionOptions(List<string> actions)
@@ -241,7 +245,7 @@ namespace StarTrekTradeWar
                 HUD();
                 selected = UI.SelectionMenu(GetLocalItems(hero.location.ItemMarkUps));
                 if (selected == -1) break;
-                else if (hero.Money> hero.location.CostOf(hero.location.ItemMarkUps[selected].Item1))
+                else if (hero.Money>  0) //hero.location.CostOf(hero.location.ItemMarkUps[selected].Item1))
                 {
                     hero.BuyItem(hero.location.ItemMarkUps[selected].Item1);
                     Utility.PromptForInput($"Item bought. Hit any key to continue.");

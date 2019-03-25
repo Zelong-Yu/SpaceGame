@@ -64,16 +64,20 @@ namespace StarTrekTradeWar
                     PrintAsciiArt("See You Next Time");
                     break;
                 case EndCondition.AgeOut:
-                    UI.CenteredString("You're 70 years old...");
+                    UI.CenteredString("You're over 70 years old...time to retire, Captain");
                     break;
                 case EndCondition.MoneyOut:
-                    UI.CenteredString("You're out of money and out of goods.");
+                    UI.CenteredString("You're out of money and out of goods. Starfleet Command is very disappointed.");
                     break;
                 case EndCondition.FuelOut:
-                    UI.CenteredString("Your stupidity has left you on your own in the galaxy without fuel");
+                    UI.CenteredString("Your stupidity has left you on your own drifting in the galaxy without fuel");
                     break;
                 case EndCondition.Death:
                     UI.CenteredString("Death is inevitable");
+                    break;
+                case EndCondition.MoneyMax:
+                    PrintAsciiArt("Mission Complete!");
+                    PrintAsciiArt("$10,000 earned");
                     break;
                 default:
                     break;

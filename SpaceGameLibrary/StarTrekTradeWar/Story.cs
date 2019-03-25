@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Colorful;
+using Console = Colorful.Console;
 
 namespace StarTrekTradeWar
 {
@@ -32,17 +33,29 @@ namespace StarTrekTradeWar
             storyFragments.Add(@"   $$ |$$ |     $$  __$$ |$$ |  $$ |$$   ____|      $$$  / \$$$ |$$  __$$ |$$ |      ");
             storyFragments.Add(@"   $$ |$$ |     \$$$$$$$ |\$$$$$$$ |\$$$$$$$\       $$  /   \$$ |\$$$$$$$ |$$ |      ");
             storyFragments.Add(@"   \__|\__|      \_______| \_______| \_______|      \__/     \__| \_______|\__|      ");
+            
             ColorGradientDisplay(storyFragments);
-            System.Console.CursorVisible = false;
+            Console.CursorVisible = false;
             PrintAsciiArt("Where No Man Has");
             PrintAsciiArt("Trade Before");
             Utility.PromptForInput("Press any key to Enter the War");
-            System.Console.CursorVisible = true;
+            Console.CursorVisible = true;
+
         }
+
+        public static int factorial(int x) => x > 1 ? x * factorial(x - 1) : 1;
+        public static int fact(int n)=> Enumerable.Range(1, n).Aggregate(1, (x, y) => x * y);
+
+        public static int fibs(int x) => x <= 2 ? 1 : fibs(x - 1) + fibs(x - 2);
+
+        public static int Fibo(int k) => Enumerable.Range(1, k).Skip(2).Aggregate(new { Current = 1, Prev = 0 },
+                                  (x, index) => new { Current = x.Prev + x.Current, Prev = x.Current }).Current;
+
+
 
         public static void ClosingMessage(EndCondition e)
         {
-            System.Console.Clear();
+            Console.Clear();
             switch (e)
             {
                 case EndCondition.NotEnd:
@@ -54,7 +67,7 @@ namespace StarTrekTradeWar
                     UI.CenteredString("You're 70 years old...");
                     break;
                 case EndCondition.MoneyOut:
-                    UI.CenteredString("You're broke");
+                    UI.CenteredString("You're out of money and out of goods.");
                     break;
                 case EndCondition.FuelOut:
                     UI.CenteredString("Your stupidity has left you on your own in the galaxy without fuel");
@@ -67,7 +80,7 @@ namespace StarTrekTradeWar
             }
         }
 
-        public static void ColorGradientDisplay(List<string> storyFragments, int r=225, int g=255, int b=250, int rstep=9, int gstep=9, int bstep=0)
+        public static void ColorGradientDisplay(List<string> storyFragments, int r=225, int g=255, int b=250, int rstep=10, int gstep=10, int bstep=5)
         {
 
             for (int i = 0; i < storyFragments.Count; i++)
@@ -80,18 +93,11 @@ namespace StarTrekTradeWar
             }
         }
 
-        private static void PrintAsciiArt(string s)
+        private static void PrintAsciiArt(string s, int r = 205, int g=235, int b = 240)
         {
-            int DA = 244;
-            int V = 212;
-            int ID = 255;
-            for (int i = 0; i < 1; i++)
-            {
-                Colorful.Console.WriteAscii(s, Color.FromArgb(DA, V, ID));
 
-                DA -= 8;
-                V -= 6;
-            }
+              Console.WriteAscii(s, Color.FromArgb(r, g, b));
+
         }
     }
 }

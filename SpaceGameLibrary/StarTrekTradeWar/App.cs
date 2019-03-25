@@ -85,10 +85,11 @@ namespace StarTrekTradeWar
 
         private EndCondition DecideGameEnd(EndCondition endCondition)
         {
+            //Age Out Ending: user older than 70 years old
             EndCondition AgeCheck(EndCondition e) => hero.Age >= 70 ? EndCondition.AgeOut : e;
-
-            EndCondition MoneyCheck(EndCondition e) => hero.Money < 0 ? EndCondition.MoneyOut : e;
-
+            //Broke Ending: user has no money left and no goods to sell
+            EndCondition MoneyCheck(EndCondition e) => hero.Money < 0 && !hero.Inventory.Any() ? EndCondition.MoneyOut : e;
+            //Fuel Out Ending: user has no fuel left
             EndCondition FuelCheck(EndCondition e) => hero.Fuel < 0 ? EndCondition.FuelOut : e;
 
             if (endCondition == EndCondition.NotEnd)
@@ -108,7 +109,7 @@ namespace StarTrekTradeWar
             Console.Clear();
             //Print current statistics
             UI.CenteredString($"Location: {hero.location.Name}   Age:" +
-                $"{hero.Age:f2} yrs old  Money: {hero.Money} Space Dollor   Fuel: {hero.Fuel:f2} Unit of Dilithium\n");
+                $"{hero.Age:f2} yrs old  Money: {hero.Money:f2} Space Dollor   Fuel: {hero.Fuel:f2} Unit of Dilithium\n");
             UI.CenteredString($"{hero.location.Description}");
         }
 
@@ -159,9 +160,35 @@ namespace StarTrekTradeWar
             do
             {
                 HUD();
-                selected = UI.SelectionMenu(new List<string>() { });
-                if (selected == -1) break;
+                selected = UI.SelectionMenu(new List<string>() { "Fuel Up ($50 per Unit of Dilithium)", "Abort" });
+                switch (selected)
+                {
+                    case -1:
+                        break;
+                    case 0:
+                        if (hero.Fuel < 100 && hero.Money > 0)
+                        {
+                            hero.Money -= 50 * (decimal)(100-hero.Fuel);
+
+                            hero.Fuel = 100;
+                        }
+                        else if (hero.Fuel >=100)
+                        {
+                            Utility.PromptForInput($"You are already fueled up. Hit any key to continue.");
+                            continue;
+                        }
+                        else if (hero.Money <=0)
+                        {
+                            Utility.PromptForInput($"You don't have enough money. Sell some goods first.");
+                            continue;
+                        }
+                        break;
+                    case 1:
+                        selected = -1;
+                        break;
+                }
             } while (selected != -1);
+
         }
 
         private void SellMenu()
@@ -193,10 +220,15 @@ namespace StarTrekTradeWar
                 HUD();
                 selected = UI.SelectionMenu(GetLocalItems(hero.location.ItemMarkUps));
                 if (selected == -1) break;
-                else
+                else if (hero.Money> hero.location.CostOf(hero.location.ItemMarkUps[selected].Item1))
                 {
                     hero.BuyItem(hero.location.ItemMarkUps[selected].Item1);
                     break;
+                }
+                else
+                {
+                    Utility.PromptForInput($"You don't have enough money. Sell some goods first.");
+                    continue;
                 }
             } while (selected !=-1);
         }

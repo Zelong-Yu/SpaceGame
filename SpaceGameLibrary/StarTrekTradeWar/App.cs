@@ -160,15 +160,15 @@ namespace StarTrekTradeWar
             do
             {
                 HUD();
-                selected = UI.SelectionMenu(new List<string>() { "Fuel Up ($50 per Unit of Dilithium)", "Abort" });
+                selected = UI.SelectionMenu(new List<string>() { "Fuel Up ($10 per Unit of Dilithium)", "Fuel $100 (10 Unit of Dilithium)" , "Abort" });
                 switch (selected)
                 {
                     case -1:
                         break;
                     case 0:
-                        if (hero.Fuel < 100 && hero.Money > 0)
+                        if (hero.Fuel < 100 && hero.Money > 10 * (decimal)(100 - hero.Fuel))
                         {
-                            hero.Money -= 50 * (decimal)(100-hero.Fuel);
+                            hero.Money -= 10 * (decimal)(100-hero.Fuel);
 
                             hero.Fuel = 100;
                         }
@@ -177,13 +177,33 @@ namespace StarTrekTradeWar
                             Utility.PromptForInput($"You are already fueled up. Hit any key to continue.");
                             continue;
                         }
-                        else if (hero.Money <=0)
+                        else
                         {
                             Utility.PromptForInput($"You don't have enough money. Sell some goods first.");
                             continue;
                         }
                         break;
                     case 1:
+                        if (hero.Fuel < 100 && hero.Money >= 100)
+                        {
+                            hero.Money -= 100;
+
+                            hero.Fuel += 10;
+
+                            if (hero.Fuel > 100) hero.Fuel = 100;
+                        }
+                        else if (hero.Fuel >= 100)
+                        {
+                            Utility.PromptForInput($"You are already fueled up. Hit any key to continue.");
+                            continue;
+                        }
+                        else
+                        {
+                            Utility.PromptForInput($"You don't have enough money. Sell some goods first.");
+                            continue;
+                        }
+                        break;
+                    case 2:
                         selected = -1;
                         break;
                 }
@@ -207,7 +227,8 @@ namespace StarTrekTradeWar
                 else
                 {
                     hero.SellItem(hero.Inventory[selected]);
-                    break;
+                    Utility.PromptForInput($"Item sold. Hit any key to continue.");
+                    continue;
                 }
             } while (selected != -1);
         }
@@ -223,7 +244,8 @@ namespace StarTrekTradeWar
                 else if (hero.Money> hero.location.CostOf(hero.location.ItemMarkUps[selected].Item1))
                 {
                     hero.BuyItem(hero.location.ItemMarkUps[selected].Item1);
-                    break;
+                    Utility.PromptForInput($"Item bought. Hit any key to continue.");
+                    continue;
                 }
                 else
                 {

@@ -8,7 +8,6 @@ namespace StarTrekTradeWar
         MoneyOut,
         FuelOut,
         Death,
-        Win,
         MoneyMax
     }
 }

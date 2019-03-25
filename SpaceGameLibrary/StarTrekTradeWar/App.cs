@@ -17,8 +17,19 @@ namespace StarTrekTradeWar
 
         public App()
         {
+            //Initialze the galaxy
             Initialize();
-
+        }
+        public void Run()
+        {
+            //Display entrance title
+            Story.DisplayHeader();
+            //Display story plot
+            Story.DisplayIntro();
+            //Main Gameloop
+            var endCondition = GameLoop();
+            //Give closing message if game ends
+            Story.ClosingMessage(endCondition);
         }
 
         private void Initialize()
@@ -40,7 +51,7 @@ namespace StarTrekTradeWar
             //Initialize the game
             locations.Add(new Planet("Earth", "The birthplace of Homo sapiens. Once blue but " +
                 "now pale yellow as a result of human stupidity.", 0, 0, new List<(Item, decimal)>() {
-                    (silk, 0.5M)}));
+                    (silk, 1M)}));
             locations.Add(new Planet("Proxima Centauri b", "The first colony of the human race ",
                 4.22, 0, new List<(Item, decimal)>() {
                     ( TransAlum, 1M),
@@ -50,35 +61,24 @@ namespace StarTrekTradeWar
                 11.61460079, 4.227368972, new List<(Item, decimal)>() {
                     ( silk, 2M),
                     ( TransAlum,0.5M),
-                    (Redmatter, 1.9M)
+                    (Redmatter, 1M)
                 }));
             locations.Add(new Planet("TRAPPIST-1e", "Solid, rocky, cold. What's flying there??",
                 0, 39.0, new List<(Item, decimal)>() {
-                    (kironide, 0.7M)
+                    (kironide, 0.5M)
                 }));
             locations.Add(new Planet("Kepler-186f", "Secret outpost at the edge of Federation. Locals want Bio-mimetic gel for some reason...",
                 280.5, 485.6, new List<(Item, decimal)>() {
                     ( Biogel, 10M),
                     ( TransAlum,0.1M),
-                    (kironide, 3M)
+                    (kironide, 1M)
                 }));
             locations.Add(new Planet("Kepler-442b", "The New Frontier. Gravity is weirdly strong in this small planet. What's THE MATTER?",
                 913.0, 913.0, new List<(Item, decimal)>() {
-                    (Redmatter, 0.1M)
+                    (Redmatter, 0.5M)
                 }));
         }
 
-        public void Run()
-        {
-            //Display entrance title
-            Story.DisplayHeader();
-            //Display story plot
-            Story.DisplayIntro();
-            //Main Gameloop
-            var endCondition = GameLoop();
-            //Give closing message if game ends
-            Story.ClosingMessage(endCondition);
-        }
 
         private EndCondition GameLoop()
         {

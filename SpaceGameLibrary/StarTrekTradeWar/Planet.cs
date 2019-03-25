@@ -55,6 +55,10 @@ namespace StarTrekTradeWar
                              select e.Item2).FirstOrDefault();
             //If the planet doesn't have Mark up rate set it to 1.
             if (itemMarkUp == 0M) itemMarkUp = 1M;
+            //price fluation 80% to 120%
+            Random rnd = new Random();
+            int num = rnd.Next(80,120);
+            itemMarkUp *= (decimal)num / 100;
             return item.Price * itemMarkUp;
             
         }

@@ -35,7 +35,7 @@ namespace StarTrekTradeWar
             var Biogel = new Item("Bio-mimetic gel", 50M, "Volatile substance highly sought after for use in illegal activities, such as genetic experimentation and biological weapons development.");
             var silk = new Item("Tholian silk", 20M, "valuable fabric");
             var Redmatter = new Item("Red matter", 5000M, " red liquid material that is able to create a black hole when not properly contained");
-            var kironide = new Item("Kironide", 200M, " telekinetic powers");
+            var kironide = new Item("Kironide", 200M, " special mineral that gives telekinetic powers");
 
             //Initialize the game
             locations.Add(new Planet("Earth", "The birthplace of Homo sapiens. Once blue but " +
@@ -337,17 +337,7 @@ namespace StarTrekTradeWar
                     if (selected == 0)
                     {
                         hero.TravelTo(destination, warpSpeed);
-                        //1 in 5 chance to get raid
-                        Random rnd = new Random();
-                        int num = rnd.Next(1000);
-                        if (num >= 800)
-                        {
-                            Decimal moneylost = (decimal)rnd.Next(100, 500);
-                            hero.Money -= moneylost;
-                            Console.Beep();
-                            Utility.PromptForInput($"You got raid! You lost ${moneylost}.  Hit any key to continue.                    ");
-
-                        }
+                        GetRaid();
                         Utility.PromptForInput($"Travel Completed. Hit any key to continue.                             ");
 
                         break;
@@ -355,6 +345,21 @@ namespace StarTrekTradeWar
                     else break;
                 }
             } while (selected != -1);
+        }
+
+        private void GetRaid()
+        {
+            //1 in 3 chance to get raid between 10%-50% of hero's money
+            Random rnd = new Random();
+            int num = rnd.Next(1000);
+            if (num >= 666)
+            {
+                Decimal moneylost = (decimal)rnd.Next((int)((double)hero.Money*0.1), (int)((double)hero.Money * 0.5));
+                hero.Money -= moneylost;
+                Console.Beep();
+                Utility.PromptForInput($"You got raid! You lost ${moneylost}.  Hit any key to continue.                    ");
+
+            }
         }
 
         private void LoadGame()

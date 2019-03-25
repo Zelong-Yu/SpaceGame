@@ -38,6 +38,7 @@ namespace StarTrekTradeWar
             Console.CursorVisible = false;
             PrintAsciiArt("Where No Man Has");
             PrintAsciiArt("Trade Before");
+            System.Console.WriteLine("Warning: Trekkies may get offended.");
             Utility.PromptForInput("Press any key to Enter the War");
             Console.CursorVisible = true;
 

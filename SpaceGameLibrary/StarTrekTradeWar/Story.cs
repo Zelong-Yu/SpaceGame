@@ -43,6 +43,24 @@ namespace StarTrekTradeWar
 
         }
 
+        internal static void DisplayIntro()
+        {
+            Console.Clear();
+            System.Console.WriteLine("Stardate 3008, a great recession came. Galatic economic crisis swept across the United " +
+                "Federation of Planets. ");
+            Utility.PromptForInput("Press any key to continue");
+            Console.Clear();
+            System.Console.WriteLine("The once forgotten concept of \"Money\" made its way back. The Starfleet has been privitized.");
+            Utility.PromptForInput("Press any key to continue");
+            Console.Clear();
+            System.Console.WriteLine("The Starfleet command secretly orders you, Captain Kirk's grandson, to earn $10,000 space dollors to save the Starfleet from financially ruined, through trading " +
+                "unspeakable goods...");
+            Utility.PromptForInput("Press any key to continue");
+            System.Console.WriteLine("Noted: if you ran out of money, or over 70 years old, or ran out of fuel while travelling between planets, you will die.");
+            Utility.PromptForInput("Press any key to accept the mission");
+
+        }
+
         public static int factorial(int x) => x > 1 ? x * factorial(x - 1) : 1;
         public static int fact(int n)=> Enumerable.Range(1, n).Aggregate(1, (x, y) => x * y);
 
@@ -65,12 +83,14 @@ namespace StarTrekTradeWar
                     break;
                 case EndCondition.AgeOut:
                     UI.CenteredString("You're over 70 years old...time to retire, Captain");
+                    PrintAsciiArt("TOO OLD");
                     break;
                 case EndCondition.MoneyOut:
                     UI.CenteredString("You're out of money and out of goods. Starfleet Command is very disappointed.");
                     break;
                 case EndCondition.FuelOut:
                     UI.CenteredString("Your stupidity has left you on your own drifting in the galaxy without fuel");
+                    PrintAsciiArt("Out of Juice");
                     break;
                 case EndCondition.Death:
                     UI.CenteredString("Death is inevitable");

@@ -34,6 +34,8 @@ namespace StarTrekTradeWar
             var TransAlum = new Item("Transparent aluminum", 100M, "Ultra-strong transparent metal essential to build a spaceship.");
             var Biogel = new Item("Bio-mimetic gel", 50M, "Volatile substance highly sought after for use in illegal activities, such as genetic experimentation and biological weapons development.");
             var silk = new Item("Tholian silk", 10M, "valuable fabric");
+            var Redmatter = new Item("Red matter", 5000M, " red liquid material that is able to create a black hole when not properly contained");
+            
             //Initialize the game
             locations.Add(new Planet("Earth", "The birthplace of Homo sapiens. Once blue but " +
                 "now pale yellow as a result of human stupidity.", 0, 0, new List<(Item, decimal)>() {
@@ -47,7 +49,17 @@ namespace StarTrekTradeWar
             locations.Add(new Planet("GJ 273b", "One of the most Earth-like planets ever found. Rich deposit of some special metal...",
                 11.61460079, 4.227368972, new List<(Item, decimal)>() {
                     ( silk, 2M),
-                    ( TransAlum,0.5M)
+                    ( TransAlum,0.5M),
+                    (Redmatter, 1.9M)
+                }));
+            locations.Add(new Planet("Kepler-186f", "Secret outpost at the edge of Federation. Locals want Bio-mimetic gel for some reason...",
+                280.5, 485.6, new List<(Item, decimal)>() {
+                    ( Biogel, 10M),
+                    ( TransAlum,0.1M),
+                }));
+            locations.Add(new Planet("Kepler-442b", "The New Frontier. Gravity is weirdly strong in this small planet. What's THE MATTER?",
+                913.0, 913.0, new List<(Item, decimal)>() {
+                    (Redmatter, 0.1M)
                 }));
         }
 
@@ -56,7 +68,7 @@ namespace StarTrekTradeWar
             //Display entrance title
             Story.DisplayHeader();
             // TODO: Display story plot
-
+            Story.DisplayIntro();
             //Main Gameloop
             var endCondition = GameLoop();
 
@@ -122,7 +134,7 @@ namespace StarTrekTradeWar
             actions.Add("Travel to Other Planets");
             actions.Add("Check Planet Market/Buy");
             actions.Add("Check inventory   /Sell");
-            actions.Add("Refuel         /Service");
+            actions.Add("Refuel         ");
             actions.Add("Save game");
             actions.Add("Load game");
         }
@@ -175,6 +187,8 @@ namespace StarTrekTradeWar
                             hero.Money -= 10 * (decimal)(100-hero.Fuel);
 
                             hero.Fuel = 100;
+
+                            Utility.PromptForInput($"Fueled Up. Hit any key to continue.");
                         }
                         else if (hero.Fuel >=100)
                         {
@@ -195,6 +209,8 @@ namespace StarTrekTradeWar
                             hero.Fuel += 10;
 
                             if (hero.Fuel > 100) hero.Fuel = 100;
+
+                            Utility.PromptForInput($"Fueled 10 unit. Hit any key to continue.");
                         }
                         else if (hero.Fuel >= 100)
                         {

@@ -32,10 +32,10 @@ namespace StarTrekTradeWar
         private void PopulateWorld()
         {
             var TransAlum = new Item("Transparent aluminum", 100M, "Ultra-strong transparent metal essential to build a spaceship.");
-            var Biogel = new Item("Bio-mimetic gel", 50M, "Volatile substance highly sought after for use in illegal activities, such as genetic experimentation and biological weapons development.");
-            var silk = new Item("Tholian silk", 20M, "valuable fabric");
-            var Redmatter = new Item("Red matter", 5000M, " red liquid material that is able to create a black hole when not properly contained");
-            var kironide = new Item("Kironide", 200M, " special mineral that gives telekinetic powers");
+            var Biogel = new Item("Bio-mimetic gel", 50M, "Volatile substance highly sought after for illegal genetic experimentation.");
+            var silk = new Item("Tholian silk", 20M, "Valuable fabric.");
+            var Redmatter = new Item("Red matter", 5000M, "Red liquid material that is able to create a black hole when not properly contained.");
+            var kironide = new Item("Kironide", 200M, "Special mineral that gives telekinetic powers.");
 
             //Initialize the game
             locations.Add(new Planet("Earth", "The birthplace of Homo sapiens. Once blue but " +
@@ -250,8 +250,10 @@ namespace StarTrekTradeWar
                 if (selected == -1) break;
                 else
                 {
+                    var key = Utility.PromptForInput(hero.Inventory[selected].Description + " Confirm Sell? Q to Quit");
+                    if (key == ConsoleKey.Q) continue;
                     hero.SellItem(hero.Inventory[selected]);
-                    Utility.PromptForInput($"Item sold. Hit any key to continue.");
+                    Utility.PromptForInput($"Item sold. Hit any key to continue.                                                          ");
                     continue;
                 }
             } while (selected != -1);
@@ -265,17 +267,24 @@ namespace StarTrekTradeWar
                 HUD();
                 selected = UI.SelectionMenu(GetLocalItems(hero.location.ItemMarkUps));
                 if (selected == -1) break;
-                else if (hero.Money>  0) //hero.location.CostOf(hero.location.ItemMarkUps[selected].Item1))
+                else 
                 {
-                    hero.BuyItem(hero.location.ItemMarkUps[selected].Item1);
-                    Utility.PromptForInput($"Item bought. Hit any key to continue.");
+                    var key = Utility.PromptForInput(hero.location.ItemMarkUps[selected].Item1.Description+" Confirm Buy? Q to Quit");
+                    if (key == ConsoleKey.Q) continue;
+                    if (hero.Money > hero.location.CostOf(hero.location.ItemMarkUps[selected].Item1))
+                    {
+                        hero.BuyItem(hero.location.ItemMarkUps[selected].Item1);
+                        Utility.PromptForInput($"Item bought. Hit any key to continue.                                                                     ");
+                        continue;
+                    }
+                    else
+                    {
+                    Utility.PromptForInput($"You don't have enough money. Sell some goods first.                                                         ");
                     continue;
+
+                    }
                 }
-                else
-                {
-                    Utility.PromptForInput($"You don't have enough money. Sell some goods first.");
-                    continue;
-                }
+                
             } while (selected !=-1);
         }
 

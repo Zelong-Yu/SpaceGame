@@ -373,12 +373,22 @@ namespace StarTrekTradeWar
             }
         }
 
-        private void LoadGame()
+        private bool LoadGame()
         {
-            hero = Utility.ReadFromJsonFile<Player>(fileName);
-            //To properly load the game, make the player travel to same location saved
-            ILocation loadLocation = locations.Find(x => x.Name == hero.location.Name);
-            hero.TravelTo(loadLocation, 1.0);
+            try
+            {
+                hero = Utility.ReadFromJsonFile<Player>(fileName);
+                //To properly load the game, make the player travel to same location saved
+                ILocation loadLocation = locations.Find(x => x.Name == hero.location.Name);
+                hero.TravelTo(loadLocation, 1.0);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Utility.PromptForInput("Load fail. File may not exist. Save Game first. Hit any key to continue.");
+                return false;
+            }
+
         }
 
         private void SaveGame()

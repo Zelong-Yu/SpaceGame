@@ -1,41 +1,32 @@
 ## Classes
 
-### Universal Controller
- #### Timer
- - CurrentTime
- - EndTime
- #### PriceFlutuator
+### Player
+ - Age
+ - Money
+ - Fuel
+ - location
+ #### List<Item> Inventory
+
+#### PriceFlutuator
  - currentPriceList
  
-### IGood
- - Price 
+### ILocation
+ - X 
+ - Y
  - Name
+ - Description
+ - List<(Item, decimal)> ItemMarkUps
+ #### DistanceTo(ILocation)
+ #### CostOf(Item)
  
+### IPricable
+ - Name
+ - Description
+ - Price  
  
-### Market
- - currentPrice(IGood good)
+### Planet : ILocation
 
-### Spaceship/Player
-- Capacity
-- Fuel
-- Ship Coordinate
-- Money
-- Age(Time) <-
-- Inventory
-- Discovered Planet List (*)
-- Total Price
-- Warp Speed <-1
-
-
-### Planet
-- Name
-- Introduction
-- Coordinate
-- Resource 
-- Factory / Upgrade (*)
-
-
-## Position
-- Quadrant
-- Sector
+### Story
+### UI
+### Utility
 

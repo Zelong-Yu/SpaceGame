@@ -42,13 +42,14 @@ namespace StarTrekTradeWar
 
         private void PopulateWorld()
         {
+            //Add items
             var TransAlum = new Item("Transparent aluminum", 100M, "Ultra-strong transparent metal essential to build a spaceship.");
             var Biogel = new Item("Bio-mimetic gel", 50M, "Volatile substance highly sought after for illegal genetic experimentation.");
             var silk = new Item("Tholian silk", 20M, "Valuable fabric.");
             var Redmatter = new Item("Red matter", 5000M, "Red liquid material that is able to create a black hole when not properly contained.");
             var kironide = new Item("Kironide", 200M, "Special mineral that gives telekinetic powers.");
 
-            //Initialize the game
+            //Add planets and items on planets
             locations.Add(new Planet("Earth", "The birthplace of Homo sapiens. Once blue but " +
                 "now pale yellow as a result of human stupidity.", 0, 0, new List<(Item, decimal)>() {
                     (silk, 1M)}));
@@ -89,7 +90,7 @@ namespace StarTrekTradeWar
             {
                 Console.Clear();
                 HUD();
-                //TODO: PrintActionsMenu
+                //PrintActionsMenu
                 int selected = UI.SelectionMenu(actions);
 
                 endCondition = DecideGameEnd(HandleSelection(selected));
@@ -118,17 +119,16 @@ namespace StarTrekTradeWar
                 endCondition = MoneyMaxCheck(endCondition);
             }
 
-
             return endCondition;
         }
 
-        //Top Display for information about player status and local info
+        //Top Display panel for information about player status and local info
         private void HUD()
         {
             Console.Clear();
             //Print current statistics
             UI.CenteredString($"Location: {hero.location.Name}   Age:" +
-                $"{hero.Age:f2} yrs old  Money: {hero.Money:f2} Space Dollor   Fuel: {hero.Fuel:f2} Unit of Dilithium\n");
+                $"{hero.Age:f2} yrs old  Money: ${hero.Money:f2} Space Dollor   Fuel: {hero.Fuel:f2} Unit of Dilithium\n");
             UI.CenteredString($"{hero.location.Description}");
             UI.CenteredString($"===============================================================================================");
         }
@@ -290,6 +290,7 @@ namespace StarTrekTradeWar
 
         private List<string> GetLocalItems(List<(Item, decimal)> itemswithmarkup)
         {
+            //get a list of planet local items with price info
             List<string> localPriceList = new List<string>();
             for (int i = 0; i < itemswithmarkup.Count; i++)
             {
@@ -298,13 +299,14 @@ namespace StarTrekTradeWar
                 string discountInfo="";
                 if (localprice > item.Price) discountInfo = "Price HIGHER than usual.";
                 else if (localprice < item.Price) discountInfo = "Price LOWER than usual.";
-                localPriceList.Add($"{item.Name} - {localprice:f2} Space Dollar    "+discountInfo);
+                localPriceList.Add($"{item.Name}  ${localprice:f2} Space Dollar    "+discountInfo);
             }
             return localPriceList;
         }
 
         private List<string> GetPlayerItems(List<Item> itemswithoutmarkup)
         {
+            //get a list of hero inventory with local price info
             List<string> PlayerPriceList = new List<string>();
             for (int i = 0; i < itemswithoutmarkup.Count; i++)
             {
@@ -313,7 +315,7 @@ namespace StarTrekTradeWar
                 string discountInfo = "";
                 if (localprice > item.Price) discountInfo = "Price HIGHER than usual.";
                 else if (localprice < item.Price) discountInfo = "Price LOWER than usual.";
-                PlayerPriceList.Add($"{item.Name} - {localprice:f2} Space Dollar    "+discountInfo);
+                PlayerPriceList.Add($"{item.Name}  ${localprice:f2} Space Dollar    "+discountInfo);
             }
             return PlayerPriceList;
         }
@@ -347,7 +349,7 @@ namespace StarTrekTradeWar
                     {
                         hero.TravelTo(destination, warpSpeed);
                         GetRaid();
-                        Utility.PromptForInput($"Travel Completed. Hit any key to continue.                             ");
+                        Utility.PromptForInput($"Travel Completed. Hit any key to continue.                                 ");
 
                         break;
                     }
@@ -366,7 +368,7 @@ namespace StarTrekTradeWar
                 Decimal moneylost = (decimal)rnd.Next((int)((double)hero.Money*0.1), (int)((double)hero.Money * 0.5));
                 hero.Money -= moneylost;
                 Console.Beep();
-                Utility.PromptForInput($"You got raid! You lost ${moneylost}.  Hit any key to continue.                    ");
+                Utility.PromptForInput($"You got raid! You lost ${moneylost}.  Hit any key to continue.                               ");
 
             }
         }

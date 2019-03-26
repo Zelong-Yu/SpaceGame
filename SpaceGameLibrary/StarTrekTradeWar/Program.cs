@@ -14,8 +14,6 @@ namespace StarTrekTradeWar
         static void Main(string[] args)
         {
             new App().Run();
-
-            
         }
 
     }

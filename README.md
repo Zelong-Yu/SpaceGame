@@ -1,6 +1,6 @@
 Star Trek Trade War: A Consoled based text game
 ===============================================
-### Zelong Yu,  Pingdwende Philippe Kabore 
+### [Zelong Yu](https://github.com/himoyu),  [Pingdwende Philippe Kabore](https://github.com/kaborephil) 
 
 [Star Trek Trade War Github folder](https://github.com/himoyu/SpaceGame/tree/master/SpaceGameLibrary/StarTrekTradeWar)
 

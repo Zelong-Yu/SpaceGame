@@ -4,7 +4,7 @@ Star Trek Trade War: A Consoled based text game
 
 [Star Trek Trade War Github folder](https://github.com/himoyu/SpaceGame/tree/master/SpaceGameLibrary/StarTrekTradeWar)
 
-![Alt text](Supporting_Document/SampleUse.gif?raw=true "StarTrekTradeWar)
+![Alt text](Supporting_Document/SampleUse.gif?raw=true "StarTrekTradeWar")
 
 
 Introduction

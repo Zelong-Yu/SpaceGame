@@ -21,6 +21,7 @@ Installation
 ------------
 1. Clone/Download the git folder to a local directory. 
 2. Source code is in `SpaceGame/SpaceGameLibrary/StarTrekTradeWar/` folder. Compile and run `StarTrekTradeWar.exe`. 
+2.1 May need to restore NuGet packages before compiling, since Colorful.Console and Newtonsoft.Json is used.
 3. A sample save file is `hero.json` in `Supporting_Document` folder. Put it in the same folder of `StarTrekTradeWar.exe` and choose Load Game. 
 
 Game Play

@@ -9,7 +9,7 @@ Star Trek Trade War: A Consoled based text game
 
 Introduction
 ------------
-**Star Trek Trade War ** is a texted based game as a result of a week-long peer programming project. 
+_Star Trek Trade War_ is a texted based game as a result of a week-long peer programming project. 
 
 [Basic warp equation](https://www.calormen.com/star_trek/warpcalc/) was used in calculating travel speed with warp factor w in c.
 
